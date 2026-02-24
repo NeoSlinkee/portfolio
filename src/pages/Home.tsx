@@ -78,7 +78,7 @@ const engagementModels = [
     type: "Primary",
     platforms: ["LinkedIn", "We Work Remotely", "Remote.co", "Wellfound"],
     description:
-      "Target Cloud Operations Engineer, Site Reliability Engineer, or Remote IT Operations Manager roles at US/EU-based SaaS companies. GMT+2 overlaps well with European hours and early US East Coast.",
+      "Contribute as a Cloud Infrastructure & IT Operations Engineer within a SaaS or technology-driven organization, owning AWS environments, identity governance, and production stability. Focused on improving reliability, access controls, and cross-system integration in distributed teams.",
     targetRole: "Mid-Senior Cloud Infrastructure Roles",
     effort: "High",
     timeToIncome: "1–3 months",
