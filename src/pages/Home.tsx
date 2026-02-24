@@ -2,7 +2,7 @@
    DESIGN PHILOSOPHY: "Executive Slate"
    Deep slate (#0F172A) + amber (#F59E0B) + off-white (#E2E8F0)
    Playfair Display (headings) + DM Sans (body) + DM Mono (labels)
-   Sections: Hero → About → Skills → Experience → Income Streams → Contact
+   Sections: Hero → About → Skills → Experience → CV → Services → Contact
    ============================================================ */
 
 import { useEffect, useRef, useState } from "react";
@@ -18,9 +18,6 @@ import {
   YAxis,
   Tooltip,
   Cell,
-  PieChart,
-  Pie,
-  Legend,
 } from "recharts";
 import {
   Cloud,
@@ -29,17 +26,13 @@ import {
   Globe,
   Award,
   Briefcase,
-  TrendingUp,
   Mail,
   Phone,
   Linkedin,
-  ExternalLink,
   ChevronDown,
   CheckCircle,
-  DollarSign,
   Users,
   Zap,
-  BookOpen,
   Star,
 } from "lucide-react";
 
@@ -71,98 +64,77 @@ const experienceData = [
   { role: "IT Systems Eng (Gentron)", years: 1.5, color: "#34D399" },
 ];
 
-const engagementModels = [
+const services = [
   {
     icon: Briefcase,
-    title: "Full-Time Remote Role",
-    type: "Primary",
-    platforms: ["LinkedIn", "We Work Remotely", "Remote.co", "Wellfound"],
-    description:
-      "Contribute as a Cloud Infrastructure & IT Operations Engineer within a SaaS or technology-driven organization, owning AWS environments, identity governance, and production stability. Focused on improving reliability, access controls, and cross-system integration in distributed teams.",
-    targetRole: "Mid-Senior Cloud Infrastructure Roles",
-    effort: "High",
-    timeToIncome: "1–3 months",
+    title: "Cloud Infrastructure Engineering",
+    type: "Full-Time",
+    description: "Contribute as a Cloud Infrastructure & IT Operations Engineer within SaaS and technology-driven organisations, owning AWS environments and ensuring production stability.",
+    bullets: [
+      "EC2 environment governance",
+      "IAM policy design & access lifecycle enforcement",
+      "Route 53 DNS architecture",
+      "Incident response & root cause analysis",
+      "Operational documentation & standardisation",
+    ],
     color: "#F59E0B",
   },
   {
     icon: Users,
-    title: "Fractional IT Director / Head of IT",
-    type: "High Value",
-    platforms: ["Contra", "Toptal", "Lemon.io", "GoFractional"],
-    description:
-      "Provide strategic IT governance and SaaS oversight for growing startups requiring senior infrastructure leadership without a full-time hire. Focus on companies in the 10–50 employee range with complex cloud needs.",
-    targetRate: "$3,000–$6,000/mo per client",
-    effort: "Medium",
-    timeToIncome: "2–6 weeks",
+    title: "Fractional Head of IT / IT Operations Leadership",
+    type: "Leadership",
+    description: "Provide strategic oversight for startups and growing businesses requiring experienced infrastructure governance without a full-time executive hire.",
+    bullets: [
+      "SaaS tenant governance (Microsoft 365 & Google Workspace)",
+      "Role-based access control & MFA enforcement",
+      "Onboarding/offboarding automation",
+      "Security posture reviews",
+      "IT operational framework design",
+      "Distributed team enablement",
+    ],
     color: "#60A5FA",
   },
   {
     icon: Cloud,
-    title: "AWS Cloud Consulting (Project-Based)",
-    type: "Freelance",
-    platforms: ["Upwork", "Freelancer", "Toptal", "Contra"],
-    description:
-      "AWS environment design, IAM governance audits, Route 53 DNS architecture, EC2 hardening, and production stability reviews. Short-term projects ideal for leveraging deep AWS expertise. High demand from SMBs without in-house cloud specialists.",
-    targetRate: "$75–$150/hr",
-    effort: "Medium",
-    timeToIncome: "2–4 weeks",
+    title: "AWS Infrastructure Consulting",
+    type: "Consulting",
+    description: "Project-based consulting to improve cloud reliability, security, and governance.",
+    bullets: [
+      "IAM architecture reviews",
+      "EC2 hardening & production optimisation",
+      "DNS architecture & routing strategy",
+      "Incident diagnostics & remediation planning",
+      "Cloud cost visibility & governance alignment",
+    ],
     color: "#34D399",
   },
   {
     icon: Shield,
-    title: "Microsoft 365 / Google Workspace Admin Retainer",
-    type: "Recurring",
-    platforms: ["Upwork", "Freelancer", "Direct outreach"],
-    description:
-      "Provide ongoing SaaS tenant administration, access lifecycle governance, and security hardening under structured monthly retainers. Target businesses and startups that need expert IT support but can’t justify a full-time hire. Services include user management, permissions audits, and security best practices implementation.",
-    targetRate: "$500–$2,000/mo per client",
-    effort: "Low–Medium",
-    timeToIncome: "1–3 weeks",
+    title: "SaaS Identity & Tenant Administration",
+    type: "Governance",
+    description: "Ongoing governance and lifecycle management for enterprise SaaS environments.",
+    bullets: [
+      "Access reviews & least-privilege enforcement",
+      "Tenant security configuration",
+      "Identity lifecycle process design",
+      "Policy enforcement & audit preparation",
+      "Documentation & knowledge transfer",
+    ],
     color: "#A78BFA",
   },
   {
-    icon: BookOpen,
-    title: "Technical Knowledge Sharing & Documentation",
-    type: "Content",
-    platforms: ["Hashnode", "Dev.to", "Medium", "Freelance writing boards"],
-    description:
-      "Write technical guides on AWS, IAM, and cloud operations. Platforms pay per article or per view. Also offer technical documentation writing as a freelance service.",
-    targetRate: "$200–$800/article",
-    effort: "Low",
-    timeToIncome: "1–2 weeks",
-    color: "#F87171",
-  },
-  {
     icon: Zap,
-    title: "IT Automation & SOP Development",
-    type: "Project",
-    platforms: ["Upwork", "Contra", "Direct outreach"],
-    description:
-      "Design identity lifecycle automation, onboarding/offboarding workflows, and structured operational SOP frameworks for distributed teams. High value for SMBs looking to standardise IT processes without hiring a full-time IT manager.",
-    targetRate: "$1,500–$5,000/project",
-    effort: "Medium",
-    timeToIncome: "2–4 weeks",
+    title: "Systems Integration & Operational Automation",
+    type: "Automation",
+    description: "Design structured workflows that connect infrastructure, identity systems, and SaaS platforms to reduce operational friction and improve reliability.",
+    bullets: [
+      "Identity lifecycle automation",
+      "Cross-system integration",
+      "Operational standardisation",
+      "Documentation frameworks",
+    ],
     color: "#FBBF24",
   },
-];
-
-const incomeDistribution = [
-  { name: "Full-Time Remote", value: 45, fill: "#F59E0B" },
-  { name: "Fractional IT Director", value: 25, fill: "#60A5FA" },
-  { name: "AWS Consulting", value: 15, fill: "#34D399" },
-  { name: "M365 Retainer", value: 10, fill: "#A78BFA" },
-  { name: "Content / Other", value: 5, fill: "#F87171" },
-];
-
-const jobPlatforms = [
-  { name: "We Work Remotely", url: "https://weworkremotely.com", focus: "Remote-first tech roles" },
-  { name: "Remote.co", url: "https://remote.co/remote-jobs/", focus: "Curated remote positions" },
-  { name: "Wellfound (AngelList)", url: "https://wellfound.com/role/r/cloud-engineer", focus: "Startup cloud roles" },
-  { name: "Toptal", url: "https://www.toptal.com", focus: "Elite freelance network" },
-  { name: "Contra", url: "https://contra.com", focus: "Independent contractor platform" },
-  { name: "Upwork", url: "https://www.upwork.com", focus: "Cloud & IT freelance projects" },
-  { name: "Dice.com", url: "https://www.dice.com", focus: "AWS/cloud contract roles" },
-  { name: "GoFractional", url: "https://www.gofractional.com", focus: "Fractional executive roles" },
 ];
 
 const cvHighlights = [
@@ -203,7 +175,7 @@ const navItems = [
   { label: "Skills", href: "#skills" },
   { label: "Experience", href: "#experience" },
   { label: "CV", href: "#cv" },
-  { label: "Income Streams", href: "#income" },
+  { label: "Services", href: "#services" },
   { label: "Contact", href: "#contact" },
 ];
 
@@ -275,7 +247,7 @@ function NavBar() {
             onMouseEnter={(e) => (e.currentTarget.style.background = "#FBBF24")}
             onMouseLeave={(e) => (e.currentTarget.style.background = "#F59E0B")}
           >
-            Hire Me
+            Work With Me
           </a>
         </div>
         {/* Mobile menu button */}
@@ -430,9 +402,9 @@ function TimelineItem({
   );
 }
 
-function IncomeCard({ stream, index }: { stream: typeof engagementModels[0]; index: number }) {
+function ServiceCard({ service, index }: { service: typeof services[0]; index: number }) {
   const { ref, inView } = useInView(0.1);
-  const Icon = stream.icon;
+  const Icon = service.icon;
   return (
     <div
       ref={ref}
@@ -445,7 +417,7 @@ function IncomeCard({ stream, index }: { stream: typeof engagementModels[0]; ind
         transitionDelay: `${index * 80}ms`,
       }}
       onMouseEnter={(e) => {
-        (e.currentTarget as HTMLDivElement).style.border = `1px solid ${stream.color}40`;
+        (e.currentTarget as HTMLDivElement).style.border = `1px solid ${service.color}40`;
         (e.currentTarget as HTMLDivElement).style.transform = "translateY(-4px)";
       }}
       onMouseLeave={(e) => {
@@ -456,9 +428,9 @@ function IncomeCard({ stream, index }: { stream: typeof engagementModels[0]; ind
       <div className="flex items-start gap-4 mb-4">
         <div
           className="p-2.5 rounded-lg flex-shrink-0"
-          style={{ background: `${stream.color}18` }}
+          style={{ background: `${service.color}18` }}
         >
-          <Icon size={20} style={{ color: stream.color }} />
+          <Icon size={20} style={{ color: service.color }} />
         </div>
         <div className="flex-1 min-w-0">
           <div className="flex flex-wrap items-center gap-2 mb-1">
@@ -470,28 +442,18 @@ function IncomeCard({ stream, index }: { stream: typeof engagementModels[0]; ind
                 color: "oklch(0.89 0.01 250)",
               }}
             >
-              {stream.title}
+              {service.title}
             </h3>
             <span
               className="text-xs px-2 py-0.5 rounded-full font-medium"
               style={{
-                background: `${stream.color}20`,
-                color: stream.color,
+                background: `${service.color}20`,
+                color: service.color,
                 fontFamily: "var(--font-mono)",
               }}
             >
-              {stream.type}
+              {service.type}
             </span>
-          </div>
-          <div
-            style={{
-              fontFamily: "var(--font-mono)",
-              fontSize: "0.8rem",
-              color: stream.color,
-              fontWeight: 500,
-            }}
-          >
-            {stream.targetRate}
           </div>
         </div>
       </div>
@@ -499,25 +461,20 @@ function IncomeCard({ stream, index }: { stream: typeof engagementModels[0]; ind
         className="mb-4 leading-relaxed"
         style={{ fontFamily: "var(--font-body)", fontSize: "0.82rem", color: "oklch(0.89 0.01 250 / 65%)" }}
       >
-        {stream.description}
+        {service.description}
       </p>
-      <div className="flex flex-wrap gap-1.5 mb-4">
-        {stream.platforms.map((p) => (
-          <span key={p} className="skill-tag" style={{ fontSize: "0.65rem" }}>
-            {p}
-          </span>
+      <ul className="space-y-1.5">
+        {service.bullets.map((bullet) => (
+          <li
+            key={bullet}
+            className="flex items-start gap-2"
+            style={{ fontFamily: "var(--font-body)", fontSize: "0.78rem", color: "oklch(0.89 0.01 250 / 70%)" }}
+          >
+            <span style={{ color: service.color, marginTop: "0.25rem" }}>•</span>
+            {bullet}
+          </li>
         ))}
-      </div>
-      <div className="flex gap-4 text-xs" style={{ fontFamily: "var(--font-mono)" }}>
-        <div>
-          <span style={{ color: "oklch(0.89 0.01 250 / 40%)" }}>Effort: </span>
-          <span style={{ color: "oklch(0.89 0.01 250 / 80%)" }}>{stream.effort}</span>
-        </div>
-        <div>
-          <span style={{ color: "oklch(0.89 0.01 250 / 40%)" }}>Time to income: </span>
-          <span style={{ color: "oklch(0.89 0.01 250 / 80%)" }}>{stream.timeToIncome}</span>
-        </div>
-      </div>
+      </ul>
     </div>
   );
 }
@@ -587,7 +544,7 @@ export default function Home() {
                   textTransform: "uppercase",
                 }}
               >
-                Available for Remote Roles · GMT+2
+                Infrastructure · Cloud · Operations
               </span>
             </div>
             {/* Name */}
@@ -629,8 +586,9 @@ export default function Home() {
                 lineHeight: 1.8,
               }}
             >
-              Specialising in remote cloud operations, AWS infrastructure management, and SaaS identity governance.
-              Proven track record delivering for US-based clients from South Africa with full timezone overlap capability.
+              Designing, securing, and stabilising production cloud environments for distributed teams and 
+              scaling SaaS businesses. Based in South Africa (GMT+2), with proven delivery for US and EU 
+              clients through full timezone overlap.
             </p>
             {/* CTAs */}
             <div className="flex flex-wrap gap-4">
@@ -648,7 +606,7 @@ export default function Home() {
                 View Full CV
               </a>
               <a
-                href="#income"
+                href="#services"
                 className="px-6 py-3 rounded font-medium text-sm transition-all duration-200"
                 style={{
                   background: "oklch(1 0 0 / 8%)",
@@ -665,12 +623,12 @@ export default function Home() {
                   (e.currentTarget as HTMLAnchorElement).style.borderColor = "oklch(1 0 0 / 15%)";
                 }}
               >
-                Income Opportunities
+                View Services
               </a>
             </div>
             {/* Badges */}
             <div className="flex flex-wrap gap-3 mt-8">
-              {["AWS Solutions Architect", "AWS Cloud Practitioner", "Remote-Ready"].map((badge) => (
+              {["AWS Solutions Architect", "AWS Cloud Practitioner"].map((badge) => (
                 <div
                   key={badge}
                   className="flex items-center gap-1.5 px-3 py-1.5 rounded-full"
@@ -1341,7 +1299,7 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Remote-specific tailoring notes */}
+            {/* Working together highlights */}
             <div
               className="rounded-xl p-6"
               style={{
@@ -1358,26 +1316,26 @@ export default function Home() {
                   color: "#F59E0B",
                 }}
               >
-                <TrendingUp size={16} />
-                Remote-Optimisation Notes
+                <Globe size={16} />
+                Working Together
               </h4>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {[
                   {
-                    title: "Timezone Advantage",
-                    detail: "GMT+2 provides 3–5 hour overlap with US East Coast and full overlap with European business hours — ideal for async-first remote teams.",
+                    title: "Timezone Coverage",
+                    detail: "GMT+2 provides 3-5 hour overlap with US East Coast and full overlap with European business hours for sync collaboration.",
                   },
                   {
-                    title: "Proven Remote Track Record",
-                    detail: "Currently serving as fractional Head of IT Ops for a US-based client (TechRescue) — demonstrating the ability to lead remotely without in-person oversight.",
+                    title: "Proven Remote Delivery",
+                    detail: "Currently serving as fractional Head of IT Ops for a US-based client, demonstrating consistent delivery without in-person oversight.",
                   },
                   {
-                    title: "Freelance Platform Presence",
-                    detail: "Active profiles on Upwork, Freelancer, Contra, and LinkedIn — ready to be activated immediately for inbound client acquisition.",
+                    title: "Production Experience",
+                    detail: "15+ years across enterprise environments including AWS infrastructure, SaaS tenant governance, and identity lifecycle management.",
                   },
                   {
-                    title: "ATS-Optimised Keywords",
-                    detail: "CV incorporates high-frequency ATS keywords: AWS, IAM, EC2, Route 53, RBAC, SaaS, incident response, cloud operations, remote, fractional.",
+                    title: "Documentation-First Approach",
+                    detail: "Strong focus on operational documentation, runbooks, and knowledge transfer to enable team autonomy.",
                   },
                 ].map((note) => (
                   <div key={note.title} className="flex gap-3">
@@ -1413,8 +1371,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── INCOME STREAMS ───────────────────────────────────────────────── */}
-      <section id="income" className="py-24">
+      {/* ── SERVICES ─────────────────────────────────────────────────────── */}
+      <section id="services" className="py-24">
         <div className="container">
           <div
             ref={incomeRef.ref}
@@ -1433,7 +1391,7 @@ export default function Home() {
                     textTransform: "uppercase",
                   }}
                 >
-                  05 / Income Streams
+                  05 / Services
                 </span>
               </div>
               <h2
@@ -1445,7 +1403,7 @@ export default function Home() {
                   color: "oklch(0.89 0.01 250)",
                 }}
               >
-                Remote Income Opportunities
+                Professional Services
               </h2>
               <p
                 style={{
@@ -1456,139 +1414,16 @@ export default function Home() {
                   lineHeight: 1.8,
                 }}
               >
-                Beyond the existing freelance engagement with Andrew, here are six income streams that align directly
-                with your skill set and can be pursued in parallel to build a resilient, multi-source income.
+                Infrastructure, cloud operations, and IT leadership services designed for 
+                distributed teams and scaling SaaS businesses.
               </p>
             </div>
 
-            {/* Income distribution chart */}
-            <div
-              className="rounded-2xl p-6 mb-10"
-              style={{
-                background: "oklch(0.17 0.02 250)",
-                border: "1px solid oklch(1 0 0 / 8%)",
-              }}
-            >
-              <h3
-                className="mb-4 text-center"
-                style={{
-                  fontFamily: "var(--font-body)",
-                  fontSize: "0.85rem",
-                  color: "oklch(0.89 0.01 250 / 60%)",
-                  letterSpacing: "0.1em",
-                  textTransform: "uppercase",
-                }}
-              >
-                Recommended Income Portfolio Distribution
-              </h3>
-              <ResponsiveContainer width="100%" height={260}>
-                <PieChart>
-                  <Pie
-                    data={incomeDistribution}
-                    cx="50%"
-                    cy="50%"
-                    outerRadius={100}
-                    innerRadius={55}
-                    paddingAngle={3}
-                    dataKey="value"
-                  >
-                    {incomeDistribution.map((entry, index) => (
-                      <Cell key={`cell-${index}`} fill={entry.fill} />
-                    ))}
-                  </Pie>
-                  <Tooltip
-                    contentStyle={{
-                      background: "oklch(0.17 0.02 250)",
-                      border: "1px solid oklch(1 0 0 / 15%)",
-                      borderRadius: "8px",
-                      color: "oklch(0.89 0.01 250)",
-                      fontFamily: "DM Mono, monospace",
-                      fontSize: "12px",
-                    }}
-                    formatter={(value: number) => [`${value}%`, "Portfolio Share"]}
-                  />
-                  <Legend
-                    iconType="circle"
-                    iconSize={8}
-                    wrapperStyle={{
-                      fontFamily: "DM Mono, monospace",
-                      fontSize: "11px",
-                      color: "oklch(0.89 0.01 250 / 70%)",
-                    }}
-                  />
-                </PieChart>
-              </ResponsiveContainer>
-            </div>
-
-            {/* Engagement model cards */}
-            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 mb-12">
-              {engagementModels.map((model, i) => (
-                <IncomeCard key={model.title} stream={model} index={i} />
+            {/* Service cards */}
+            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+              {services.map((service, i) => (
+                <ServiceCard key={service.title} service={service} index={i} />
               ))}
-            </div>
-
-            {/* Job Platforms */}
-            <div>
-              <h3
-                className="mb-6 flex items-center gap-3"
-                style={{
-                  fontFamily: "var(--font-display)",
-                  fontSize: "1.3rem",
-                  fontWeight: 700,
-                  color: "oklch(0.89 0.01 250)",
-                }}
-              >
-                <DollarSign size={20} style={{ color: "#F59E0B" }} />
-                Where to Find Remote Roles
-              </h3>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                {jobPlatforms.map((platform) => (
-                  <a
-                    key={platform.name}
-                    href={platform.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-start gap-3 p-4 rounded-xl transition-all duration-200 group"
-                    style={{
-                      background: "oklch(0.17 0.02 250)",
-                      border: "1px solid oklch(1 0 0 / 8%)",
-                      textDecoration: "none",
-                    }}
-                    onMouseEnter={(e) => {
-                      (e.currentTarget as HTMLAnchorElement).style.borderColor = "#F59E0B40";
-                      (e.currentTarget as HTMLAnchorElement).style.transform = "translateY(-2px)";
-                    }}
-                    onMouseLeave={(e) => {
-                      (e.currentTarget as HTMLAnchorElement).style.borderColor = "oklch(1 0 0 / 8%)";
-                      (e.currentTarget as HTMLAnchorElement).style.transform = "translateY(0)";
-                    }}
-                  >
-                    <ExternalLink size={14} className="mt-0.5 flex-shrink-0" style={{ color: "#F59E0B" }} />
-                    <div>
-                      <div
-                        style={{
-                          fontFamily: "var(--font-body)",
-                          fontSize: "0.85rem",
-                          fontWeight: 600,
-                          color: "oklch(0.89 0.01 250)",
-                        }}
-                      >
-                        {platform.name}
-                      </div>
-                      <div
-                        style={{
-                          fontFamily: "var(--font-body)",
-                          fontSize: "0.72rem",
-                          color: "oklch(0.89 0.01 250 / 45%)",
-                          marginTop: "2px",
-                        }}
-                      >
-                        {platform.focus}
-                      </div>
-                    </div>
-                  </a>
-                ))}
-              </div>
             </div>
           </div>
         </div>
@@ -1706,7 +1541,7 @@ export default function Home() {
                 </div>
               </div>
 
-              {/* Availability card */}
+              {/* Engagement card */}
               <div
                 className="rounded-2xl p-8 flex flex-col justify-between"
                 style={{
@@ -1717,18 +1552,17 @@ export default function Home() {
                 <div>
                   <div
                     className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full mb-6"
-                    style={{ background: "#22C55E20", border: "1px solid #22C55E40" }}
+                    style={{ background: "#F59E0B20", border: "1px solid #F59E0B40" }}
                   >
-                    <div className="w-2 h-2 rounded-full animate-pulse" style={{ background: "#22C55E" }} />
                     <span
                       style={{
                         fontFamily: "var(--font-mono)",
                         fontSize: "0.7rem",
-                        color: "#22C55E",
+                        color: "#F59E0B",
                         letterSpacing: "0.1em",
                       }}
                     >
-                      AVAILABLE NOW
+                      ENGAGEMENT OPTIONS
                     </span>
                   </div>
                   <h3
@@ -1740,7 +1574,7 @@ export default function Home() {
                       color: "oklch(0.89 0.01 250)",
                     }}
                   >
-                    Open to Remote Opportunities
+                    Work With Me
                   </h3>
                   <p
                     className="mb-6"
@@ -1751,15 +1585,15 @@ export default function Home() {
                       lineHeight: 1.8,
                     }}
                   >
-                    Actively seeking remote full-time roles, fractional engagements, and cloud consulting contracts.
-                    Immediate availability.
+                    Available for remote full-time roles, fractional leadership engagements, and cloud consulting projects.
+                    GMT+2 with flexible overlap for US and EU teams.
                   </p>
                   <div className="space-y-2 mb-8">
                     {[
-                      "Full-time remote cloud/IT operations roles",
+                      "Cloud & IT Operations Engineering",
                       "Fractional Head of IT / IT Director",
-                      "AWS cloud consulting & audits",
-                      "M365 / Google Workspace retainer management",
+                      "AWS Infrastructure Consulting",
+                      "SaaS Tenant Administration",
                     ].map((item) => (
                       <div key={item} className="flex items-center gap-2">
                         <CheckCircle size={14} style={{ color: "#F59E0B", flexShrink: 0 }} />
@@ -1819,7 +1653,7 @@ export default function Home() {
               color: "oklch(0.89 0.01 250 / 35%)",
             }}
           >
-            Cloud Infrastructure & IT Operations Engineer · AWS Certified · Remote-Ready
+            Cloud Infrastructure & IT Operations Engineer · AWS Certified
           </span>
         </div>
       </footer>
