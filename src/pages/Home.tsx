@@ -71,7 +71,7 @@ const experienceData = [
   { role: "IT Systems Eng (Gentron)", years: 1.5, color: "#34D399" },
 ];
 
-const incomeStreams = [
+const engagementModels = [
   {
     icon: Briefcase,
     title: "Full-Time Remote Role",
@@ -79,7 +79,7 @@ const incomeStreams = [
     platforms: ["LinkedIn", "We Work Remotely", "Remote.co", "Wellfound"],
     description:
       "Target Cloud Operations Engineer, Site Reliability Engineer, or Remote IT Operations Manager roles at US/EU-based SaaS companies. GMT+2 overlaps well with European hours and early US East Coast.",
-    targetRate: "$60,000–$100,000/yr",
+    targetRole: "Mid-Senior Cloud Infrastructure Roles",
     effort: "High",
     timeToIncome: "1–3 months",
     color: "#F59E0B",
@@ -90,7 +90,7 @@ const incomeStreams = [
     type: "High Value",
     platforms: ["Contra", "Toptal", "Lemon.io", "GoFractional"],
     description:
-      "Offer part-time IT leadership to 2–3 startups simultaneously. You already do this for TechRescue — replicate the model. Startups need senior IT oversight without a full-time hire.",
+      "Provide strategic IT governance and SaaS oversight for growing startups requiring senior infrastructure leadership without a full-time hire. Focus on companies in the 10–50 employee range with complex cloud needs.",
     targetRate: "$3,000–$6,000/mo per client",
     effort: "Medium",
     timeToIncome: "2–6 weeks",
@@ -102,7 +102,7 @@ const incomeStreams = [
     type: "Freelance",
     platforms: ["Upwork", "Freelancer", "Toptal", "Contra"],
     description:
-      "AWS migrations, IAM governance audits, Route 53 DNS setups, and EC2 environment hardening. Project-based work with a defined scope and deliverables commands premium rates.",
+      "AWS environment design, IAM governance audits, Route 53 DNS architecture, EC2 hardening, and production stability reviews. Short-term projects ideal for leveraging deep AWS expertise. High demand from SMBs without in-house cloud specialists.",
     targetRate: "$75–$150/hr",
     effort: "Medium",
     timeToIncome: "2–4 weeks",
@@ -114,7 +114,7 @@ const incomeStreams = [
     type: "Recurring",
     platforms: ["Upwork", "Freelancer", "Direct outreach"],
     description:
-      "Offer monthly retainer packages to SMBs for M365/Google Workspace administration, access reviews, and security hardening. Recurring income that stacks with other work.",
+      "Provide ongoing SaaS tenant administration, access lifecycle governance, and security hardening under structured monthly retainers. Target businesses and startups that need expert IT support but can’t justify a full-time hire. Services include user management, permissions audits, and security best practices implementation.",
     targetRate: "$500–$2,000/mo per client",
     effort: "Low–Medium",
     timeToIncome: "1–3 weeks",
@@ -122,8 +122,8 @@ const incomeStreams = [
   },
   {
     icon: BookOpen,
-    title: "Technical Content & Documentation",
-    type: "Side Income",
+    title: "Technical Knowledge Sharing & Documentation",
+    type: "Content",
     platforms: ["Hashnode", "Dev.to", "Medium", "Freelance writing boards"],
     description:
       "Write technical guides on AWS, IAM, and cloud operations. Platforms pay per article or per view. Also offer technical documentation writing as a freelance service.",
@@ -138,7 +138,7 @@ const incomeStreams = [
     type: "Project",
     platforms: ["Upwork", "Contra", "Direct outreach"],
     description:
-      "Build onboarding/offboarding automation, IAM lifecycle scripts, and operational SOPs for distributed teams. High-value niche with low competition from generalist developers.",
+      "Design identity lifecycle automation, onboarding/offboarding workflows, and structured operational SOP frameworks for distributed teams. High value for SMBs looking to standardise IT processes without hiring a full-time IT manager.",
     targetRate: "$1,500–$5,000/project",
     effort: "Medium",
     timeToIncome: "2–4 weeks",
@@ -430,7 +430,7 @@ function TimelineItem({
   );
 }
 
-function IncomeCard({ stream, index }: { stream: typeof incomeStreams[0]; index: number }) {
+function IncomeCard({ stream, index }: { stream: typeof engagementModels[0]; index: number }) {
   const { ref, inView } = useInView(0.1);
   const Icon = stream.icon;
   return (
@@ -1520,10 +1520,10 @@ export default function Home() {
               </ResponsiveContainer>
             </div>
 
-            {/* Income stream cards */}
+            {/* Engagement model cards */}
             <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 mb-12">
-              {incomeStreams.map((stream, i) => (
-                <IncomeCard key={stream.title} stream={stream} index={i} />
+              {engagementModels.map((model, i) => (
+                <IncomeCard key={model.title} stream={model} index={i} />
               ))}
             </div>
 
