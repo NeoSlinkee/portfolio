@@ -684,7 +684,7 @@ export default function Home() {
                 }}
               >
                 <img
-                  src="/Photo.jpg"
+                  src="/photo.jpg"
                   alt="Christopher Maarschalkerweerd"
                   className="w-full h-full object-cover"
                 />
