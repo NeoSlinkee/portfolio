@@ -6,6 +6,7 @@
    ============================================================ */
 
 import { useEffect, useRef, useState } from "react";
+import profilePhoto from "../assets/photo.jpg";
 import {
   RadarChart,
   Radar,
@@ -684,7 +685,7 @@ export default function Home() {
                 }}
               >
                 <img
-                  src="/photo.jpg"
+                  src={profilePhoto}
                   alt="Christopher Maarschalkerweerd"
                   className="w-full h-full object-cover"
                 />
