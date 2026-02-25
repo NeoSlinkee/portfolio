@@ -6,7 +6,6 @@
    ============================================================ */
 
 import { useEffect, useRef, useState } from "react";
-import profilePhoto from "../assets/photo.jpg";
 import {
   RadarChart,
   Radar,
@@ -685,7 +684,7 @@ export default function Home() {
                 }}
               >
                 <img
-                  src={profilePhoto}
+                  src="/Photo.jpg"
                   alt="Christopher Maarschalkerweerd"
                   className="w-full h-full object-cover"
                 />
@@ -1291,7 +1290,7 @@ export default function Home() {
                 </h4>
                 <div className="flex flex-wrap gap-4 items-start">
                   <a
-                    href="https://www.credly.com/badges/2da6fd80-c096-4687-822b-d34bc9d367db/public_url"
+                    href="https://www.credly.com/badges/32583a82-aba7-4e13-b496-84d1ea1f2dbc/public_url"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="rounded-lg overflow-hidden transition-transform duration-200 hover:scale-105"
@@ -1322,7 +1321,7 @@ export default function Home() {
                     </span>
                   </a>
                   <a
-                    href="https://www.credly.com/badges/32583a82-aba7-4e13-b496-84d1ea1f2dbc/public_url"
+                    href="https://www.credly.com/badges/2da6fd80-c096-4687-822b-d34bc9d367db/public_url"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="rounded-lg overflow-hidden transition-transform duration-200 hover:scale-105"
