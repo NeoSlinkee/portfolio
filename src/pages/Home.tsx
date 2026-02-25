@@ -1487,7 +1487,7 @@ export default function Home() {
                   {[
                     { icon: Mail, label: "Email", value: "chrismaarsch@gmail.com", href: "mailto:chrismaarsch@gmail.com" },
                     { icon: Phone, label: "Phone", value: "+27 79 626 6254", href: "tel:+27796266254" },
-                    { icon: Linkedin, label: "LinkedIn", value: "linkedin.com/in/christopher-maarschalkerweerd", href: "https://linkedin.com" },
+                    { icon: Linkedin, label: "LinkedIn", value: "linkedin.com/in/chris-maarschalkerweerd", href: "https://linkedin.com" },
                   ].map((contact) => {
                     const Icon = contact.icon;
                     return (
