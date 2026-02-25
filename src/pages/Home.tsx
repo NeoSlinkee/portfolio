@@ -6,6 +6,7 @@
    ============================================================ */
 
 import { useEffect, useRef, useState } from "react";
+import profilePhoto from "../assets/photo.jpg";
 import {
   RadarChart,
   Radar,
@@ -673,7 +674,22 @@ export default function Home() {
             className="transition-all duration-700"
             style={{ opacity: aboutRef.inView ? 1 : 0, transform: aboutRef.inView ? "translateY(0)" : "translateY(32px)" }}
           >
-            <div className="flex items-start gap-4 mb-12">
+            <div className="flex items-start gap-6 mb-12">
+              <div
+                className="flex-shrink-0 rounded-full overflow-hidden"
+                style={{
+                  width: "120px",
+                  height: "120px",
+                  border: "3px solid #F59E0B",
+                  boxShadow: "0 4px 20px rgba(245, 158, 11, 0.3)",
+                }}
+              >
+                <img
+                  src={profilePhoto}
+                  alt="Christopher Maarschalkerweerd"
+                  className="w-full h-full object-cover"
+                />
+              </div>
               <div>
                 <div className="flex items-center gap-3 mb-2">
                   <div className="h-px w-8" style={{ background: "#F59E0B" }} />
@@ -1273,28 +1289,69 @@ export default function Home() {
                 >
                   Certifications
                 </h4>
-                <div className="flex flex-wrap gap-3">
-                  {["AWS Certified Solutions Architect – Associate", "AWS Certified Cloud Practitioner"].map((cert) => (
-                    <div
-                      key={cert}
-                      className="flex items-center gap-2 px-3 py-2 rounded-lg"
+                <div className="flex flex-wrap gap-4 items-start">
+                  <a
+                    href="https://www.credly.com/badges/2da6fd80-c096-4687-822b-d34bc9d367db/public_url"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="rounded-lg overflow-hidden transition-transform duration-200 hover:scale-105"
+                    style={{
+                      background: "#F59E0B10",
+                      border: "1px solid #F59E0B30",
+                      padding: "12px",
+                      display: "block",
+                    }}
+                  >
+                    <img
+                      src="https://images.credly.com/size/340x340/images/0e284c3f-5164-4b21-8660-0d84737941bc/image.png"
+                      alt="AWS Certified Solutions Architect – Associate"
+                      width="120"
+                      height="120"
+                      style={{ display: "block" }}
+                    />
+                    <span
+                      className="block mt-2 text-center"
                       style={{
-                        background: "#F59E0B15",
-                        border: "1px solid #F59E0B40",
+                        fontFamily: "var(--font-body)",
+                        fontSize: "0.7rem",
+                        color: "oklch(0.89 0.01 250 / 85%)",
+                        maxWidth: "120px",
                       }}
                     >
-                      <Award size={14} style={{ color: "#F59E0B" }} />
-                      <span
-                        style={{
-                          fontFamily: "var(--font-body)",
-                          fontSize: "0.8rem",
-                          color: "oklch(0.89 0.01 250 / 85%)",
-                        }}
-                      >
-                        {cert}
-                      </span>
-                    </div>
-                  ))}
+                      Solutions Architect Associate
+                    </span>
+                  </a>
+                  <a
+                    href="https://www.credly.com/badges/32583a82-aba7-4e13-b496-84d1ea1f2dbc/public_url"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="rounded-lg overflow-hidden transition-transform duration-200 hover:scale-105"
+                    style={{
+                      background: "#F59E0B10",
+                      border: "1px solid #F59E0B30",
+                      padding: "12px",
+                      display: "block",
+                    }}
+                  >
+                    <img
+                      src="https://images.credly.com/size/340x340/images/00634f82-b07f-4bbd-a6bb-53de397fc3a6/image.png"
+                      alt="AWS Certified Cloud Practitioner"
+                      width="120"
+                      height="120"
+                      style={{ display: "block" }}
+                    />
+                    <span
+                      className="block mt-2 text-center"
+                      style={{
+                        fontFamily: "var(--font-body)",
+                        fontSize: "0.7rem",
+                        color: "oklch(0.89 0.01 250 / 85%)",
+                        maxWidth: "120px",
+                      }}
+                    >
+                      Cloud Practitioner
+                    </span>
+                  </a>
                 </div>
               </div>
             </div>
