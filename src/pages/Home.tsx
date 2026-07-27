@@ -16,7 +16,7 @@ import {
 
 const navItems = [
   { label: "Work", href: "#work" },
-  { label: "Case Studies", href: "#case-studies" },
+  { label: "Process", href: "#process" },
   { label: "Capabilities", href: "#capabilities" },
   { label: "Experience", href: "#experience" },
   { label: "Contact", href: "#contact" },
@@ -160,14 +160,31 @@ const experience = [
   },
 ];
 
-const caseStudySteps = [
-  "Problem framing",
-  "Workflow mapping",
-  "System design",
-  "Implementation",
-  "Access and security",
-  "Documentation",
-  "Deployment QA",
+const engagementSteps = [
+  {
+    title: "Scoping call",
+    text: "Forty-five minutes to understand how the work actually runs today, where it breaks, and what a good outcome looks like. I ask for your rules rather than assuming them.",
+  },
+  {
+    title: "Blueprint and sign-off",
+    text: "I map the full flow visually and send it over. Nothing gets built until you confirm it matches how the business really works.",
+  },
+  {
+    title: "Fixed scope and quote",
+    text: "Costs are quoted against the agreed blueprint, so you approve a defined piece of work instead of an open-ended hourly commitment.",
+  },
+  {
+    title: "Build",
+    text: "Implementation happens inside your own accounts and tooling. You own the system, the data, and the access from day one.",
+  },
+  {
+    title: "Access and security",
+    text: "Least-privilege roles, MFA, and documented access boundaries. Credentials stay with you, and nothing is shared through channels it should not be.",
+  },
+  {
+    title: "Handover and support",
+    text: "SOPs and runbooks so your team can operate it without me. Ongoing support is optional, with bundled hours rather than a surprise invoice.",
+  },
 ];
 
 function VisualPanel({ title, accent }: { title: string; accent: string }) {
@@ -312,8 +329,8 @@ export default function Home() {
                 View portfolio
                 <ArrowRight className="h-4 w-4" />
               </a>
-              <a href="#case-studies" className="inline-flex items-center gap-2 rounded-lg border border-white/15 px-5 py-3 text-sm font-bold text-white transition hover:bg-white/10">
-                Read case studies
+              <a href="#process" className="inline-flex items-center gap-2 rounded-lg border border-white/15 px-5 py-3 text-sm font-bold text-white transition hover:bg-white/10">
+                How I work
               </a>
             </div>
           </div>
@@ -360,28 +377,31 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="case-studies" className="bg-white py-20">
+      <section id="process" className="bg-white py-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid gap-10 lg:grid-cols-[0.8fr_1fr]">
             <div>
-              <p className="text-sm font-bold uppercase text-cyan-700">How the work is presented</p>
-              <h2 className="mt-3 text-4xl font-black text-slate-950">Clear project stories without unnecessary client noise.</h2>
+              <p className="text-sm font-bold uppercase text-cyan-700">Working together</p>
+              <h2 className="mt-3 text-4xl font-black text-slate-950">You approve a plan before I build anything.</h2>
               <p className="mt-4 text-lg leading-8 text-slate-600">
-                Each case study explains the operational problem, design choices, stack, and business value in a way that is easy to read and appropriate for a public portfolio.
+                Most technical projects fail at the start rather than the end, usually because nobody agreed what was being built. I map the work first, quote against that map, and hand over something your team can run without me.
               </p>
+              <a
+                href="#contact"
+                className="mt-6 inline-flex items-center gap-2 rounded-lg bg-slate-950 px-5 py-3 text-sm font-bold text-white transition hover:bg-slate-800"
+              >
+                Start with a scoping call
+                <ArrowRight className="h-4 w-4" />
+              </a>
             </div>
             <div className="grid gap-3 sm:grid-cols-2">
-              {caseStudySteps.map((step, index) => (
-                <div key={step} className="rounded-lg border border-slate-200 bg-slate-50 p-4">
+              {engagementSteps.map((step, index) => (
+                <div key={step.title} className="rounded-lg border border-slate-200 bg-slate-50 p-4">
                   <div className="mb-3 flex h-9 w-9 items-center justify-center rounded-lg bg-slate-950 text-sm font-bold text-white">
                     {index + 1}
                   </div>
-                  <h3 className="text-base font-bold text-slate-950">{step}</h3>
-                  <p className="mt-2 text-sm leading-6 text-slate-600">
-                    {index < 2
-                      ? "Describe the business context clearly so the project has a real-world anchor."
-                      : "Show the engineering thinking, tradeoffs, and delivery quality using public-friendly detail."}
-                  </p>
+                  <h3 className="text-base font-bold text-slate-950">{step.title}</h3>
+                  <p className="mt-2 text-sm leading-6 text-slate-600">{step.text}</p>
                 </div>
               ))}
             </div>
