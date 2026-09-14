@@ -1,0 +1,41 @@
+# Dependencies
+node_modules
+
+# Build output
+dist
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Logs
+*.log
+npm-debug.log*
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# OS files
+Thumbs.db
+Desktop.ini
+
+# Personal documents and job-search material: keep out of this public repo
+*.docx
+CV-*.pdf
+LinkedIn-Profile.pdf
+ideas.md
+Job-Board-Strategy-Guide.md
+/*Action Plan*
+/*Cover Letter*
+/*LinkedIn Profile*
+/*Case Study*
+/Christopher Maarschalkerweerd.md
